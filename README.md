@@ -33,8 +33,8 @@ Pontos técnicos relevantes:
 - **Remonta o fluxo TCP**: numa requisição real o cabeçalho HTTP e o corpo (onde ficam
   usuário/senha) chegam em pacotes separados. O sniffer acumula o payload de cada
   conexão e só extrai as credenciais quando o corpo está completo (via `Content-Length`).
-- Os nomes de campo reconhecidos como usuário/senha estão em `CAMPOS_USUARIO` e
-  `CAMPOS_SENHA` no topo do script — é só editar esses conjuntos para cobrir um campo
+- Os nomes de campo reconhecidos como usuário/senha estão em `USERNAMES` e
+  `PASSWORDS` no topo do script — é só editar esses conjuntos para cobrir um campo
   customizado da sua aplicação.
 
 ---
@@ -182,7 +182,7 @@ Nome da interface de loopback por sistema: **Linux** = `lo`, **macOS** = `lo0`,
 | Sintoma                                                | Causa provável / solução                                                                                   |
 |--------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
 | `Interface 'lo' not found !`                           | No Windows o loopback é `\Device\NPF_Loopback` (já é o padrão do `rodar.ps1`).                              |
-| Aparece o `POST` mas nenhuma credencial                | O nome do campo não está em `CAMPOS_USUARIO`/`CAMPOS_SENHA`. Veja o *Request Payload* no DevTools e adicione o nome ao conjunto no início do script. |
+| Aparece o `POST` mas nenhuma credencial                | O nome do campo não está em `USERNAMES`/`PASSWORDS`. Veja o *Request Payload* no DevTools e adicione o nome ao conjunto no início do script. |
 | Nada aparece ao logar                                  | Porta errada (teste a do back **e** a do front), ou o app é HTTPS (use o modo `https`).                     |
 | Tráfego só aparece cifrado no modo `http`              | O app está em HTTPS, não HTTP. Em texto puro não há o que extrair — esse é justamente o ponto da aula.       |
 | `scapy nao esta instalado`                             | `pip install scapy` (o `rodar.ps1` faz isso sozinho).                                                      |
