@@ -34,7 +34,6 @@ def classificar_campo(nome):
 
 
 def transforma_json_lista_pares(dados, caminho=""):
-    """Transforma um JSON aninhado numa lista plana de pares (caminho, valor)."""
     if isinstance(dados, dict):
         pares = []
         for chave, valor in dados.items():
@@ -314,10 +313,6 @@ def rodar_captura(modo, iface, host, port, limite_pacotes):
     imprimir_cabecalho(modo, iface, filtro)
     monitor = MonitorDeTrafego(modo, IP, IPv6, TCP, Raw)
 
-    # Capturamos numa thread separada (AsyncSniffer) em vez de chamar sniff()
-    # diretamente. Assim a thread principal fica livre para receber o Ctrl+C na
-    # hora: no Windows, o sniff() bloqueia dentro do Npcap esperando o proximo
-    # pacote e so percebe o Ctrl+C quando algum trafego chega.
     sniffer = AsyncSniffer(iface=iface, filter=filtro, prn=monitor.tratar,
                            store=0, count=limite_pacotes or 0)
     try:

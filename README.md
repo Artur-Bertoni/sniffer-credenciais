@@ -67,7 +67,7 @@ Pontos técnicos relevantes:
 Valida que o parser está íntegro. Não precisa de scapy nem de Npcap:
 
 ```powershell
-python sniffer_credenciais.py selftest
+py sniffer_credenciais.py selftest
 ```
 
 Saída esperada: `RESULTADO: 7/7 testes passaram`.
@@ -125,7 +125,7 @@ do diário.
 | `-Modo`   | `selftest`              | `http`, `https` ou `selftest`.                                   |
 | `-Porta`  | `8000`                  | Porta TCP do serviço (a do login, vista no DevTools).            |
 | `-IP`     | *(vazio)*               | Restringe a captura a um IP de servidor (recomendado em produção).|
-| `-Iface`  | `\Device\NPF_Loopback`  | Interface de captura. O padrão é o loopback do Npcap (localhost).|
+| `-Iface`  | `\Device\NPF_Loopback`  | Interface de captura. O padrão é o loopback do Npcap (localhost). Comuns para https são `Wi-Fi 2` e `Ethernet 2`|
 
 ---
 
@@ -136,7 +136,7 @@ O mesmo código que extraiu a senha no HTTP **não consegue nada aqui** — só 
 cifrados:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\rodar.ps1 -Modo https -Porta 443 -IP 203.0.113.10
+powershell -ExecutionPolicy Bypass -File .\rodar.ps1 -Modo https -Porta 443 -IP 203.0.113.10 -Iface "Ethernet 2"
 ```
 
 Saída esperada (tráfego ilegível):
