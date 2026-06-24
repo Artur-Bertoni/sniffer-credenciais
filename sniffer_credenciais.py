@@ -413,23 +413,9 @@ def selftest():
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Sniffer didatico de credenciais HTTP vs HTTPS (Seguranca da Informacao).",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog=(
-            "Exemplos:\n"
-            "  sudo python3 sniffer_credenciais.py http  --iface lo  --port 8000\n"
-            "  sudo python3 sniffer_credenciais.py https --iface eth0 --host 203.0.113.10 --port 443\n"
-            "  python3 sniffer_credenciais.py selftest\n\n"
-            "Interface de loopback por sistema:\n"
-            "  Linux  : lo\n"
-            "  macOS  : lo0\n"
-            "  Windows: \\Device\\NPF_Loopback (precisa do Npcap com suporte a loopback)\n"
-        ),
-    )
-    parser.add_argument("modo", choices=["http", "https", "selftest"],
-                        help="http: extrai credenciais em claro | https: conta trafego cifrado | selftest: valida o extrator offline")
-    parser.add_argument("--iface", default="lo", help="interface de captura (padrao: lo)")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("modo", choices=["http", "https", "selftest"], help="http: extrai credenciais em claro | https: conta trafego cifrado | selftest: valida o extrator offline")
+    parser.add_argument("--iface", default="lo", help="interface de captura")
     parser.add_argument("--host", default=None, help="restringe a captura a um IP de servidor (recomendado em producao)")
     parser.add_argument("--port", type=int, default=8000, help="porta TCP do servico (padrao: 8000)")
     parser.add_argument("--count", type=int, default=0, help="encerra apos N pacotes (0 = ilimitado)")
